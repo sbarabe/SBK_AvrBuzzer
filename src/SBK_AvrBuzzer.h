@@ -78,11 +78,13 @@ public:
     //     Operating mode.
     //     Default = OutputMode::SINGLE_ENDED.
     //
-    //     OutputMode::SINGLE_ENDED = Standard 1-pin operation.
-    //     OutputMode::DIFFERENTIAL = Differential 2-pin operation. The two outputs are
-    //                                driven in opposite states, producing a larger
-    //                                voltage across a passive piezoelectric buzzer for
-    //                                increased sound output.
+    //     OutputMode::SINGLE_ENDED = pin1 generates the waveform.
+    //                                If pin2 is provided, it is held LOW
+    //                                and acts as the buzzer return path.
+    //
+    //     OutputMode::DIFFERENTIAL = pin1 and pin2 are driven in opposite
+    //                                states, producing a larger voltage
+    //                                across a passive piezoelectric buzzer.
     //
     //                                If no valid second GPIO pin is provided, the buzzer
     //                                automatically operates in 1-pin mode.

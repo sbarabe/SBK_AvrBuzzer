@@ -13,6 +13,19 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Fixed
 
+## [1.0.1] - 2026-07-15
+
+### Changed
+
+- Updated single-ended two-pin operation so that, when pin2 is provided, it is held LOW and acts as the passive piezo buzzer return path.
+- Updated API documentation to clarify the behavior of pin2 in single-ended and differential output modes.
+
+### Fixed
+
+- Fixed initialization of the second GPIO output so its direct port register pointer and bit mask are available in both single-ended and differential modes.
+- Ensured both buzzer outputs are driven LOW when playback stops, the buzzer is muted, or the output mode changes.
+- Prevented invalid access to the second GPIO port data when pin2 is provided in single-ended mode.
+
 ## [1.0.0] - 2026-07-15
 
 ### Added

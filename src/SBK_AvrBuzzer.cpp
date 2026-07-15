@@ -87,7 +87,9 @@ void Buzzer::begin()
     if (_pin2 != NO_PIN)
     {
         pinMode(_pin2, OUTPUT);
-        digitalWrite(_pin2, LOW);
+
+        _port2 = portOutputRegister(digitalPinToPort(_pin2));
+        _mask2 = digitalPinToBitMask(_pin2);
     }
 
     _silence();
