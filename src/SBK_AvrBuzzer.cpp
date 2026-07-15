@@ -84,12 +84,10 @@ void Buzzer::begin()
     _port1 = portOutputRegister(digitalPinToPort(_pin1));
     _mask1 = digitalPinToBitMask(_pin1);
 
-    if (_mode == OutputMode::DIFFERENTIAL)
+    if (_pin2 != NO_PIN)
     {
         pinMode(_pin2, OUTPUT);
-
-        _port2 = portOutputRegister(digitalPinToPort(_pin2));
-        _mask2 = digitalPinToBitMask(_pin2);
+        digitalWrite(_pin2, LOW);
     }
 
     _silence();
@@ -112,6 +110,8 @@ void Buzzer::setMode(OutputMode mode)
     {
         _mode = OutputMode::SINGLE_ENDED;
     }
+
+    _silence();
 }
 
 //=====================================================================
@@ -311,6 +311,9 @@ void Buzzer::_stopHardwareTimer()
 // In DIFFERENTIAL mode, the second output is driven in the opposite
 // state, producing a larger voltage across the passive piezoelectric
 // buzzer.
+//
+// In SINGLE_ENDED mode, pin2 is held LOW when provided, allowing it to
+// act as the buzzer return path.
 //=====================================================================
 void Buzzer::_writeOutputs(bool state)
 {
@@ -324,18 +327,25 @@ void Buzzer::_writeOutputs(bool state)
     {
         *_port1 |= _mask1;
 
-        if (_mode == OutputMode::DIFFERENTIAL)
+        if (_pin2 != NO_PIN)
         {
-            *_port2 &= ~_mask2;
+            *_port2 &= ~_mask2; // LOW in both modes
         }
     }
     else
     {
         *_port1 &= ~_mask1;
 
-        if (_mode == OutputMode::DIFFERENTIAL)
+        if (_pin2 != NO_PIN)
         {
-            *_port2 |= _mask2;
+            if (_mode == OutputMode::DIFFERENTIAL)
+            {
+                *_port2 |= _mask2; // opposite phase
+            }
+            else
+            {
+                *_port2 &= ~_mask2; // stay LOW
+            }
         }
     }
 }
@@ -347,7 +357,7 @@ void Buzzer::_silence()
 {
     *_port1 &= ~_mask1;
 
-    if (_mode == OutputMode::DIFFERENTIAL)
+    if (_pin2 != NO_PIN)
     {
         *_port2 &= ~_mask2;
     }
