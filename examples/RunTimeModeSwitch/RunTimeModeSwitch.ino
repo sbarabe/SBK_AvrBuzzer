@@ -6,7 +6,7 @@
 //
 // A passive piezo buzzer must be connected between pins 9 and 10.
 // The sketch alternates between SINGLE_ENDED and DIFFERENTIAL output,
-// allowing the difference in sound level to be heard.
+// allowing the difference in sound output to be heard.
 //=====================================================================
 
 // In SINGLE_ENDED mode, pin 9 drives the buzzer while pin 10 is held LOW.
@@ -17,9 +17,10 @@
 #include <Arduino.h>
 #include <SBK_AvrBuzzer.h>
 
-// Connect a passive piezo buzzer between pins 9 and 10.
+// Connect a passive piezo buzzer directly between pins 9 and 10.
+// Do not connect either terminal to GND.
 
-Buzzer buzzer(9, 10);
+Buzzer buzzer(9, 10, OutputMode::SINGLE_ENDED);
 
 uint32_t lastToneTime = 0;
 bool differentialMode = false;
