@@ -159,10 +159,35 @@ update()
 
 ### Configuration
 
+#### Single-ended output (default)
+
+Connect one side of the passive piezo buzzer to a GPIO pin and the other side to GND.
+
 ```cpp
-setMode()
-enableDifferential()
+Buzzer buzzer(9);
 ```
+
+or
+
+```cpp
+Buzzer buzzer(9, NO_PIN, OutputMode::SINGLE_ENDED);
+```
+
+---
+
+#### Differential output
+
+Connect the passive piezo buzzer between two GPIO pins.
+
+```cpp
+Buzzer buzzer(9, 10, OutputMode::DIFFERENTIAL);
+```
+
+Both pins are driven with opposite polarities, approximately doubling the voltage across the buzzer for increased sound output.
+
+> **Note:** Differential mode is only enabled when a valid second GPIO pin is provided. If `pin2` is omitted or set to `NO_PIN`, the library automatically falls back to single-ended operation.
+
+> **Warning:** Differential mode is intended **only for passive piezoelectric buzzers**. Do not use it with active buzzers, which contain internal drive electronics.
 
 ### Status
 
