@@ -82,6 +82,8 @@ lib_deps =
 
 Buzzer buzzer(9);
 
+uint32_t lastToneTime = 0;
+
 void setup()
 {
     buzzer.begin();
@@ -89,14 +91,15 @@ void setup()
 
 void loop()
 {
-    buzzer.playTone(1000, 250);
+    buzzer.update();
 
-    while (buzzer.isPlaying())
+    if (millis() - lastToneTime >= 1000)
     {
-        buzzer.update();
+        lastToneTime = millis();
+        buzzer.playTone(1000, 250);
     }
 
-    delay(500);
+    // Other application code can run here.
 }
 ```
 
