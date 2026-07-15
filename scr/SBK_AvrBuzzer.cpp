@@ -51,6 +51,10 @@ ISR(TIMER1_COMPA_vect)
 Buzzer::Buzzer(uint8_t pin1, uint8_t pin2, OutputMode mode)
     : _pin1(pin1),
       _pin2(pin2),
+      _port1(nullptr),
+      _port2(nullptr),
+      _mask1(0),
+      _mask2(0),
       // Enable DIFFERENTIAL mode only if a valid second GPIO pin is available.
       _mode((mode == OutputMode::DIFFERENTIAL && (pin2 != NO_PIN))
                 ? OutputMode::DIFFERENTIAL
