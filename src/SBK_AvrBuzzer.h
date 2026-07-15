@@ -52,8 +52,6 @@
 #error "SBK_AvrBuzzer requires an AVR microcontroller with Timer1."
 #endif
 
-
-
 // Special value indicating that no second GPIO pin is used.
 static constexpr uint8_t NO_PIN = 255;
 
@@ -161,7 +159,10 @@ public:
     // Returns true while the buzzer is generating a tone or chirp.
     bool isPlaying() const;
 
-    // Mutes the buzzer and stops any current playback immediately.
+    // Mutes the buzzer and silences any current playback immediately.
+    //
+    // Playback timing continues while muted. If unmuted before the playback
+    // duration expires, the tone or chirp resumes.
     void mute();
 
     // Unmutes the buzzer.

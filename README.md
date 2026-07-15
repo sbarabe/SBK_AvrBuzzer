@@ -52,6 +52,10 @@ It cannot be used simultaneously with other libraries that also configure Timer1
 - Some motor-control libraries
 - Other Timer1-based libraries
 
+Create only one `Buzzer` instance per sketch.
+
+All `Buzzer` objects share Timer1, so multiple instances are not supported.
+
 ---
 
 ## Installation
@@ -115,22 +119,6 @@ This produces a linear sweep from **500 Hz** to **2000 Hz** over **1 second**.
 
 ---
 
-## Differential Output
-
-For increased sound output, connect the buzzer between two GPIO pins.
-
-```cpp
-Buzzer buzzer(9, 10, OutputMode::DIFFERENTIAL);
-```
-
-The library automatically drives both pins in opposite states, effectively doubling the voltage across a passive piezo buzzer.
-
-If the second pin is omitted (or `NO_PIN` is used), the library automatically falls back to standard single-ended operation.
-
-> **Important:** Differential mode must only be used with **passive** piezo buzzers. Active buzzers contain internal drive electronics and must be driven from a single output.
-
----
-
 ## Typical Usage Pattern
 
 Call `update()` every iteration of `loop()`.
@@ -168,15 +156,15 @@ Buzzer buzzer(9, NO_PIN, OutputMode::SINGLE_ENDED);
 
 ### Differential output
 
-Connect the passive piezo buzzer between two GPIO pins.
+For increased sound output, connect the buzzer between two GPIO pins.
 
 ```cpp
 Buzzer buzzer(9, 10, OutputMode::DIFFERENTIAL);
 ```
 
-Both pins are driven with opposite polarities, approximately doubling the voltage across the buzzer for increased sound output.
+Both pins are driven with opposite polarities, approximately doubling the peak-to-peak voltage applied across the passive piezo element compared with single-ended operation.
 
-> **Note:** Differential mode is only enabled when a valid second GPIO pin is provided. If `pin2` is omitted or set to `NO_PIN`, the library automatically falls back to single-ended operation.
+> **Note:** Differential mode is enabled only when `pin2` is not set to `NO_PIN`. If `pin2` is omitted or set to `NO_PIN`, the library automatically falls back to single-ended operation. The supplied pin numbers must be valid digital GPIO pins for the selected board.
 
 > **Warning:** Differential mode is intended **only for passive piezoelectric buzzers**. Do not use it with active buzzers, which contain internal drive electronics.
 

@@ -472,7 +472,10 @@ bool Buzzer::isPlaying() const
 }
 
 //=====================================================================
-// Mutes the buzzer and stops any current playback immediately.
+// Mutes the buzzer and silences any current playback immediately.
+//
+// Playback timing continues while muted. If unmuted before the playback
+// duration expires, the tone or chirp resumes.
 //=====================================================================
 void Buzzer::mute()
 {
