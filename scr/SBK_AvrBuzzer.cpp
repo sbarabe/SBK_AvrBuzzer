@@ -1,5 +1,5 @@
 //=====================================================================
-// Buzzer Library - Implementation
+// SBK_AvrBuzzer Library - Implementation
 //=====================================================================
 //
 // SPDX-License-Identifier: MIT
@@ -10,7 +10,7 @@
 // Licensed under the MIT License.
 //=====================================================================
 
-#include "Buzzer.h"
+#include "SBK_AvrBuzzer.h"
 #include <avr/interrupt.h>
 
 // Pointer to the currently active buzzer instance.
@@ -232,7 +232,7 @@ void Buzzer::_startHardwareTimer(uint16_t frequency)
     // tone frequency.
     //
     // Timer1 runs at:
-    //     F_CPU / 8
+    //     F_CPU / 8 (divided by the Timer1 prescaler)
     //
     // The buzzer output changes state on every interrupt, so the
     // interrupt frequency must be twice the desired tone frequency.

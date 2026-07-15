@@ -3,32 +3,56 @@
 #include <Arduino.h>
 
 //=====================================================================
-// Buzzer Library
+// SBK_AvrBuzzer Library
 //=====================================================================
 //
 // SPDX-License-Identifier: MIT
 //
-// Non-blocking passive piezo buzzer driver for MémoBot.
+// Non-blocking passive piezo buzzer library for AVR-based Arduino
+// boards.
 //
-// This implementation uses Timer1 on ATmega328PB to generate stable
-// tone timing. The timer interrupt drives the selected GPIO pin(s), so
-// the tone quality does not depend on how often update() is called.
+// SBK_AvrBuzzer uses Timer1 to generate accurate square-wave tones
+// without blocking the main application. Tone generation is performed
+// by a hardware timer interrupt, allowing the rest of the sketch to
+// continue running while audio is playing.
 //
 // Features:
-//   - Hardware-timed tone playback using Timer1
+//   - Non-blocking tone playback
+//   - Hardware-timed square-wave generation using Timer1
 //   - Frequency chirps
-//   - Single-pin and differential two-pin output
+//   - Single-ended (1-pin) and differential (2-pin) output
 //   - Mute support
 //
 // Notes:
 //   - Designed for passive piezoelectric buzzers.
 //   - Differential mode must not be used with active buzzers,
 //     as they contain internal drive electronics.
-//   - Uses Timer1. Do not use Timer1 for another feature at the same time.
+//   - Uses Timer1 exclusively. Do not use Timer1 for another feature
+//     at the same time.
 //
 // Copyright (c) 2026 Samuel Barabe
 // Licensed under the MIT License.
 //=====================================================================
+
+//=====================================================================
+// Compile-Time Safeguards
+//=====================================================================
+
+// Ensure the selected Arduino board defines the CPU clock frequency.
+#ifndef F_CPU
+#error "SBK_AvrBuzzer requires F_CPU to be defined by the selected Arduino board."
+#endif
+
+// This library directly accesses AVR Timer1 registers.
+#if !defined(__AVR__)
+#error "SBK_AvrBuzzer supports AVR microcontrollers only."
+#endif
+
+#if !defined(TCCR1A) || !defined(TCCR1B)
+#error "SBK_AvrBuzzer requires an AVR microcontroller with Timer1."
+#endif
+
+
 
 // Special value indicating that no second GPIO pin is used.
 static constexpr uint8_t NO_PIN = 255;

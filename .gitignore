@@ -17,6 +17,7 @@ Desktop.ini
 .idea/
 
 # PlatformIO
+platformio.ini
 .pio/
 .pioenvs/
 .piolibdeps/
