@@ -1,0 +1,54 @@
+{
+  "name": "SBK_BarDrive",
+  "version": "2.0.4",
+  "description": "Unified LED bar meter control for MAX7219, MAX7221 and HT16K33.",
+  "keywords": [
+    "bar meter",
+    "barmeter",
+    "bargraph",
+    "bar graph",
+    "graph",
+    "segment",
+    "segments",
+    "led",
+    "leds",
+    "animation",
+    "animations",
+    "MAX7219",
+    "MAX7221",
+    "HT16K33",
+    "matrix",
+    "display",
+    "array",
+    "linear",
+    "BL28-3005SK",
+    "BL28-3005SA",
+    "BLZ28-3005SK",
+    "BLZ28-3005SA"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sbarabe/SBK_BarDrive"
+  },
+  "authors": [
+    {
+      "name": "Samuel Barabé",
+      "email": "smartbuildskits@gmail.com",
+      "maintainer": true
+    }
+  ],
+  "license": "MIT",
+  "frameworks": ["arduino"],
+  "platforms": ["atmelavr", "espressif8266", "espressif32"],
+  "headers": ["SBK_BarDrive.h"],
+  "dependencies": [
+    {
+      "name": "SBK_HT16K33",
+      "version": ">=2.0.0"
+    },
+    {
+      "name": "SBK_MAX72xx",
+      "version": ">=2.0.4"
+    }
+  ]
+}
