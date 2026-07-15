@@ -5,7 +5,7 @@
 
 Tone generation automatically adapts to the board clock frequency through the Arduino F_CPU definition. The library has been primarily tested at 8 MHz and should also operate correctly on standard 16 MHz AVR Arduino boards
 
-Supported boards
+**Supported boards**
 
 - Arduino Uno
 - Arduino Nano
@@ -14,7 +14,7 @@ Supported boards
 - ATmega328PB
 - Other AVR boards providing Timer1
 
-Not supported
+**Not supported**
 
 - ESP32
 - RP2040
