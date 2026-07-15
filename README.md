@@ -74,7 +74,7 @@ or install the latest release manually from GitHub.
 
 ```ini
 lib_deps =
-    SBK_AvrBuzzer
+    sbarabe/SBK_AvrBuzzer
 ```
 
 ---
@@ -212,4 +212,4 @@ unmute()
 
 This project is released under the MIT License.
 
-Copyright (c) 2026 Samuel Barabe.
+Copyright (c) 2026 Samuel Barabe (Smart Builds & Kits).

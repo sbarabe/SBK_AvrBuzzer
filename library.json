@@ -1,4 +1,5 @@
 {
+  "$schema": "https://raw.githubusercontent.com/platformio/platformio-core/develop/platformio/assets/schema/library.json",
   "name": "SBK_AvrBuzzer",
   "version": "1.0.0",
   "description": "Non-blocking passive piezo buzzer library for AVR-based Arduino boards using Timer1.",
@@ -24,5 +25,6 @@
   ],
   "license": "MIT",
   "frameworks": "arduino",
-  "platforms": "atmelavr"
+  "platforms": "atmelavr",
+  "headers": "SBK_AvrBuzzer.h"
 }

@@ -5,7 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
----
+## [Unreleased]
+
+### Added
+
+### Changed
+
+### Fixed
 
 ## [1.0.0] - 2026-07-15
 
@@ -23,18 +29,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - Automatic fallback to single-ended mode when no second output pin is provided.
 - Support for AVR-based Arduino boards using the Arduino framework.
 - Arduino Library Manager metadata.
-- PlatformIO library metadata.
+- PlatformIO Registry metadata.
 - Example documentation and API reference.
 
-## [Unreleased]
-
-### Added
-
-### Changed
-
-### Fixed
-
----
-
-## [1.0.0] - 2026-07-15
-...
+[Unreleased]: https://github.com/sbarabe/SBK_AvrBuzzer/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/sbarabe/SBK_AvrBuzzer/releases/tag/v1.0.0
