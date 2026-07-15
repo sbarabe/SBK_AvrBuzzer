@@ -148,21 +148,9 @@ Tone generation itself is handled by Timer1 interrupts, while `update()` manages
 
 ---
 
-## API
+## Wiring and Configuration
 
-### Playback
-
-```cpp
-begin()
-playTone()
-playChirp()
-stop()
-update()
-```
-
-### Configuration
-
-#### Single-ended output (default)
+### Single-ended output (default)
 
 Connect one side of the passive piezo buzzer to a GPIO pin and the other side to GND.
 
@@ -178,7 +166,7 @@ Buzzer buzzer(9, NO_PIN, OutputMode::SINGLE_ENDED);
 
 ---
 
-#### Differential output
+### Differential output
 
 Connect the passive piezo buzzer between two GPIO pins.
 
@@ -191,6 +179,20 @@ Both pins are driven with opposite polarities, approximately doubling the voltag
 > **Note:** Differential mode is only enabled when a valid second GPIO pin is provided. If `pin2` is omitted or set to `NO_PIN`, the library automatically falls back to single-ended operation.
 
 > **Warning:** Differential mode is intended **only for passive piezoelectric buzzers**. Do not use it with active buzzers, which contain internal drive electronics.
+
+---
+
+## API
+
+### Playback
+
+```cpp
+begin()
+playTone()
+playChirp()
+stop()
+update()
+```
 
 ### Status
 
