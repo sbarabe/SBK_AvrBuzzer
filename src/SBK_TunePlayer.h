@@ -1,7 +1,8 @@
 #pragma once
 
 #include <Arduino.h>
-#include <SBK_AvrBuzzer.h>
+#include "SBK_AvrBuzzer.h"
+#include "SBK_Tune.h"
 
 // Forward declaration.
 // The Tune structure will later be moved into its own Tune.h file.

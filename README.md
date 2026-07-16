@@ -2,7 +2,7 @@
 
 **SBK_AvrBuzzer** is a lightweight, non-blocking library for driving passive piezoelectric buzzers on AVR-based Arduino boards.
 
-Unlike Arduino's built-in `tone()` function, SBK_AvrBuzzer generates hardware-timed square waves using **Timer1**, allowing your application to continue running while tones or frequency chirps are playing.
+Unlike Arduino's built-in `tone()` function, SBK_AvrBuzzer generates hardware-timed square waves using **Timer1**, allowing your application to continue running while **tones**, **chirps**, and **complete musical melodies** are playing.
 
 The library supports both **single-ended (1-pin)** and **differential (2-pin)** output modes, making it suitable for everything from simple buzzers to louder differential-drive piezo configurations.
 
@@ -19,6 +19,9 @@ The library supports both **single-ended (1-pin)** and **differential (2-pin)** 
 - Runtime output mode switching
 - Mute / unmute support
 - Automatic adaptation to the board `F_CPU`
+- Non-blocking melody playback with `TunePlayer`
+- `PROGMEM` tune definitions
+- Random and repeat tune playback
 
 ---
 
@@ -79,7 +82,16 @@ lib_deps =
 
 ---
 
-## Basic Example
+## Examples
+
+The library includes the following example sketches:
+
+- 01_PlayTone
+- 02_PlayChirp
+- ...
+- 06_TunePlayer
+
+### Basic Example
 
 ```cpp
 #include <SBK_AvrBuzzer.h>
@@ -109,13 +121,73 @@ void loop()
 
 ---
 
-## Playing a Chirp
+### Playing a Chirp
 
 ```cpp
 buzzer.playChirp(500, 2000, 1000);
 ```
 
 This produces a linear sweep from **500 Hz** to **2000 Hz** over **1 second**.
+
+---
+
+### TunePlayer
+
+The optional `TunePlayer` class provides non-blocking playback of musical melodies.
+
+Applications that only need tones or chirps do not need to include or instantiate `TunePlayer`.
+
+```cpp
+#include <SBK_AvrBuzzer.h>
+#include <SBK_Tune.h>
+#include <SBK_TunePlayer.h>
+
+Buzzer buzzer(9);
+TunePlayer tunePlayer(buzzer);
+
+SBK_DEFINE_TUNE(TUNE_STARTUP, 140,
+    NOTE_C5, D_8,
+    NOTE_E5, D_8,
+    NOTE_G5, D_4
+);
+
+void setup()
+{
+    buzzer.begin();
+
+    tunePlayer.play(TUNE_STARTUP);
+}
+
+void loop()
+{
+    buzzer.update();
+    tunePlayer.update();
+}
+```
+
+Tune definitions are stored in program memory (`PROGMEM`) to minimize SRAM usage on AVR microcontrollers.
+
+#### Defining Tunes
+
+Tunes are declared using the `SBK_DEFINE_TUNE()` helper macro.
+
+```cpp
+SBK_DEFINE_TUNE(TUNE_NOTIFICATION, 120,
+    NOTE_C5, D_8,
+    NOTE_G5, D_8,
+    NOTE_C6, D_4
+);
+```
+
+A tune is declared by specifying its **name**, **tempo (BPM)** followed by alternating **note** and **duration** values.
+
+```cpp
+SBK_DEFINE_TUNE(name, bpm,
+    NOTE, DURATION,
+    NOTE, DURATION,
+    ...
+);
+```
 
 ---
 
@@ -127,12 +199,13 @@ Call `update()` every iteration of `loop()`.
 void loop()
 {
     buzzer.update();
+    tunePlayer.update();
 
     // Rest of your application
 }
 ```
 
-Tone generation itself is handled by Timer1 interrupts, while `update()` manages playback duration and chirp frequency changes.
+Tone generation is handled by Timer1 interrupts. `Buzzer::update()` manages tone duration and chirp frequency changes, while `TunePlayer::update()` schedules melody playback.
 
 ---
 
@@ -172,7 +245,9 @@ Both pins are driven with opposite polarities, approximately doubling the peak-t
 
 ## API
 
-### Playback
+### Buzzer
+
+#### Playback
 
 ```cpp
 begin()
@@ -182,7 +257,7 @@ stop()
 update()
 ```
 
-### Status
+#### Status
 
 ```cpp
 isPlaying()
@@ -190,11 +265,31 @@ isMuted()
 isDifferential()
 ```
 
-### Sound Control
+#### Sound Control
 
 ```cpp
 mute()
 unmute()
+```
+
+### TunePlayer
+
+`TunePlayer` controls melody sequencing and uses a `Buzzer` instance to generate each note.
+
+#### Playback
+
+```cpp
+play()
+playRandom()
+repeat()
+stop()
+update()
+```
+
+#### Status
+
+```cpp
+isPlaying()
 ```
 
 ---

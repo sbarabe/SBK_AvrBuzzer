@@ -11,7 +11,6 @@
 //=====================================================================
 
 #include "SBK_TunePlayer.h"
-#include "SBK_Tune.h"
 
 #include <avr/pgmspace.h>
 
