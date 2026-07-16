@@ -13,6 +13,19 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Fixed
 
+## [1.1.1] - 2026-07-16
+
+### Added
+
+- Added a dedicated `TunePlayer` example sketch demonstrating melody playback.
+
+### Changed
+
+- Improved README documentation for the `TunePlayer` API and tune definition workflow.
+- Expanded API documentation with melody playback information and usage examples.
+- Improved example organization and library documentation.
+- Updated `TunePlayer` to include `SBK_Tune.h` directly, simplifying its use.
+
 ## [1.1.0] - 2026-07-16
 
 ### Added
@@ -61,7 +74,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - PlatformIO Registry metadata.
 - Example documentation and API reference.
 
-[Unreleased]: https://github.com/sbarabe/SBK_AvrBuzzer/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/sbarabe/SBK_AvrBuzzer/compare/v1.1.1...HEAD
+[1.1.1]: https://github.com/sbarabe/SBK_AvrBuzzer/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/sbarabe/SBK_AvrBuzzer/compare/v1.0.1...v1.1.0
 [1.0.1]: https://github.com/sbarabe/SBK_AvrBuzzer/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/sbarabe/SBK_AvrBuzzer/releases/tag/v1.0.0
