@@ -13,6 +13,22 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Fixed
 
+## [1.1.0] - 2026-07-16
+
+### Added
+
+- Added non-blocking `TunePlayer` for asynchronous melody playback.
+- Added `Tune` data structure and `SBK_DEFINE_TUNE()` helper macro for defining melodies stored in program memory (`PROGMEM`).
+- Added musical note duration constants, including common dotted durations.
+- Added original example melodies and a complete `TunePlayer` Arduino example sketch.
+
+### Changed
+
+- Refactored melody playback into a reusable `TunePlayer` class associated with a `Buzzer` instance.
+- Removed global-state dependencies from the melody playback engine, allowing multiple independent `TunePlayer` instances.
+- Simplified melody creation by integrating musical note definitions, duration constants, and tune declaration helpers into `SBK_Tune.h`.
+- Updated examples and documentation to reflect the new melody playback API.
+
 ## [1.0.1] - 2026-07-15
 
 ### Changed
@@ -45,5 +61,7 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - PlatformIO Registry metadata.
 - Example documentation and API reference.
 
-[Unreleased]: https://github.com/sbarabe/SBK_AvrBuzzer/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/sbarabe/SBK_AvrBuzzer/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/sbarabe/SBK_AvrBuzzer/compare/v1.0.1...v1.1.0
+[1.0.1]: https://github.com/sbarabe/SBK_AvrBuzzer/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/sbarabe/SBK_AvrBuzzer/releases/tag/v1.0.0
